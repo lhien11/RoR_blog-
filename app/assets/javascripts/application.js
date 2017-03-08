@@ -12,6 +12,40 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require bootstrap-sprockets 
+//= require bootstrap-sprockets
 //= require turbolinks
 //= require_tree .
+
+document.addEventListener("turbolinks:load", function() {
+    tinymce.remove();
+    tinymce.init({
+        height: '475',
+        theme: "modern",
+        paste_data_images: true,
+        selector: 'textarea#post_body',
+        plugins: [
+            "codesample image media link code",
+            "advlist autolink lists link image charmap print preview hr anchor pagebreak",
+            "searchreplace wordcount visualblocks visualchars code fullscreen",
+            "insertdatetime media nonbreaking save table contextmenu directionality",
+            "emoticons template paste textcolor colorpicker textpattern"
+        ],
+        toolbar: "undo redo | styleselect | bold italic link | codesample image media | code | print preview media | forecolor backcolor emoticons",
+        image_advtab: true,
+        file_picker_callback: function(callback, value, meta) {
+          if (meta.filetype == 'image') {
+            $('#upload').trigger('click');
+            $('#upload').on('change', function() {
+              var file = this.files[0];
+              var reader = new FileReader();
+              reader.onload = function(e) {
+                callback(e.target.result, {
+                  alt: ''
+                });
+              };
+              reader.readAsDataURL(file);
+            });
+          }
+        }
+    });
+});
