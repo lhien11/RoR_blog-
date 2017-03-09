@@ -29,22 +29,27 @@
           <li class="list-group-item">
             <div class="field">
               <%= f.label :title %>
-              <%= f.text_field :title, class: 'form-control'%>
+              <%= f.text_field :title, class: 'form-control' %>
             </div>
           </li>
           <li class="list-group-item">
             <div class="field">
               <%= f.label :banner_image_url %>
-              <%= f.text_field :banner_image_url, class: 'form-control'%>
+              <%= f.text_field :banner_image_url, class: 'form-control' %>
             </div>
           </li>
           <li class="list-group-item">
             <div class="field">
               <%= f.label :description %>
-              <%= f.text_area :description, class: 'form-control'%>
+              <%= f.text_area :description, class: 'form-control' %>
             </div>
           </li>
-
+          <li class="list-group-item">
+            <div class="field">
+              <%= f.label 'Tags' %>
+              <%= f.text_area :tag_list, class: 'form-control' %>
+            </div>
+          </li>
           <li class="list-group-item">
             <div class="actions">
               <%= f.submit "Save blog post", class: 'btn btn-success btn-block' %>
@@ -52,6 +57,11 @@
           </li>
         </ul>
       </div>
+
+      <% if @post.persisted? %>
+        <%= link_to 'Show', @post %> |
+      <% end %>
+      <%= link_to 'Back', authors_posts_path %>
 
     </div>
     <div class="col-md-8">
